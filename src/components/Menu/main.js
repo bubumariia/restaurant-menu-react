@@ -9,23 +9,28 @@ export default class Menu extends Component {
       meals: data,
     };
   }
+
+  // handleClick f() gets clicked buttons name in order to filter the data by category
   handleClick = (event) => {
     let categoryBtn = event.target.name;
     let mealArray = [];
+    // iterating the data by using HOF to create the filtered data by category
     data.map((meal) => {
+      // As we know there is no category like All, we get all the elements from data
       if (categoryBtn === "allData") {
         mealArray.push(meal);
         return meal;
       }
+      // filters by category
       if (meal.category === categoryBtn) {
         mealArray.push(meal);
         return meal;
       }
     });
+    // it sets new state where only filtered data
     this.setState({ meals: mealArray });
   };
   render() {
-    console.log(this.state.meals);
     const { meals } = this.state;
     return (
       <React.Fragment>
@@ -35,6 +40,7 @@ export default class Menu extends Component {
             <hr />
           </header>
           <nav>
+            {/* accessing the buttons by names */}
             <button
               className="btn-all"
               name="allData"
@@ -65,6 +71,7 @@ export default class Menu extends Component {
             </button>
           </nav>
           <main>
+            {/* showing the data on UI, after pressing the Buttons */}
             {meals.map((el) => {
               return (
                 <>
